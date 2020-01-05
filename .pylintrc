@@ -1,0 +1,10 @@
+[MESSAGES CONTROL]
+disable=
+  R,
+  C,
+  redefined-outer-name,
+  import-error,
+  no-name-in-module
+
+[REPORTS]
+output-format=colorized

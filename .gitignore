@@ -1,0 +1,13 @@
+build
+.coverage
+.coverage.*
+dist
+
+*.egg-info
+_env
+.mypy_cache
+*__pycache__
+.tox
+.pytest_cache
+.vscode/*
+!.vscode/settings.json
