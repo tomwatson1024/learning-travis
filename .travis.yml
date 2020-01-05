@@ -1,0 +1,7 @@
+language: python
+install:
+  - pip install poetry
+  - poetry install -v
+python: "3.6"
+script:
+  - make coverage
