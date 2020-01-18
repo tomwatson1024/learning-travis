@@ -2,18 +2,38 @@ stages:
   - checks
   - deploy-test
 
-&python
-  language: python
-  install:
-    - pip install poetry
-    - poetry install -v
+language: python
+install:
+  - pip install poetry
+  - poetry install -v
 
 jobs:
   include:
-  - <<: *python
-    python: 3.6
-    script:
-    - make coverage
-  - <<: *python
-    script:
-    - make style
+
+    - python: 3.6
+      script:
+        - make flake8
+
+    - python: 3.6
+      script:
+        - make pylint
+
+    - python: 3.6
+      script:
+        - make black_check
+
+    - python: 3.6
+      script:
+        - make isort_check
+
+    - python: 3.6
+      script:
+        - make docs_check
+
+    - python: 3.6
+      script:
+        - make mypy
+
+    - python: 3.6
+      script:
+        - make coverage

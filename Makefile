@@ -46,9 +46,14 @@ docs_check:
 	poetry run pydocstyle $(ALL_FILES)
 
 
+TOX_ENVS ?= py36
+
 .PHONY: test
 test:
-	poetry run tox -v -e clean,py36,report -- $(EXTRA_PYTEST_ARGS)
+	poetry run coverage erase
+	poetry run tox -v -e $(TOX_ENVS) -- $(EXTRA_PYTEST_ARGS)
+	poetry run coverage combine
+	poetry run coverage report
 
 .PHONY: coverage
 coverage: test
