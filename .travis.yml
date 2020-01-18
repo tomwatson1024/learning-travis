@@ -2,6 +2,11 @@ language: python
 install:
   - pip install poetry
   - poetry install -v
-python: "3.6"
-script:
-  - make coverage
+jobs:
+  include:
+  - python: 3.6
+    script:
+    - make coverage
+  - python: 3.8
+    script:
+    - make style
