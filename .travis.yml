@@ -1,12 +1,19 @@
-language: python
-install:
-  - pip install poetry
-  - poetry install -v
+stages:
+  - checks
+  - deploy-test
+
+&python
+  language: python
+  install:
+    - pip install poetry
+    - poetry install -v
+
 jobs:
   include:
-  - python: 3.6
+  - <<: *python
+    python: 3.6
     script:
     - make coverage
-  - python: 3.8
+  - <<: *python
     script:
     - make style
