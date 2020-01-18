@@ -37,3 +37,6 @@ jobs:
     - python: 3.6
       script:
         - make coverage
+      after_success:
+        - coveralls
+
