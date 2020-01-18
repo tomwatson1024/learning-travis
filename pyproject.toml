@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Tom Watson <tom.watson1024@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/tomwatson1024/learning-travis"
 
 [tool.poetry.dependencies]
 python = "~3.6"
