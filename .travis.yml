@@ -1,43 +1,76 @@
+env:
+  POETRY_VERSION: 1.0.2
+
 stages:
   - checks
   - deploy-test
+  - deploy
 
+os: linux
 language: python
 install:
-  - pip install poetry
+  - >-
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
+    | python - --version ${POETRY_VERSION} --yes
+  - source $HOME/.poetry/env
   - poetry install -v
 
 jobs:
   include:
 
-    - python: 3.6
+    - name: flake8
+      stage: checks
+      python: 3.6
       script:
         - make flake8
 
-    - python: 3.6
+    - name: pylint
+      stage: checks
+      python: 3.6
       script:
         - make pylint
 
-    - python: 3.6
+    - name: black-check
+      stage: checks
+      python: 3.6
       script:
         - make black_check
 
-    - python: 3.6
+    - name: isort-check
+      stage: checks
+      python: 3.6
       script:
         - make isort_check
 
-    - python: 3.6
+    - name: docs-check
+      stage: checks
+      python: 3.6
       script:
         - make docs_check
 
-    - python: 3.6
+    - name: mypy
+      stage: checks
+      python: 3.6
       script:
         - make mypy
 
-    - python: 3.6
+    - name: test
+      stage: checks
+      python: 3.6
       script:
         - make coverage
       after_success:
         - pip install python-coveralls
         - coveralls
 
+    - name: package
+      stage: deploy-test
+      python: 3.6
+      script:
+        - make build
+
+    - name: docs-test
+      stage: deploy-test
+      python: 3.6
+      script:
+        - make docs

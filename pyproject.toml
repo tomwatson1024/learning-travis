@@ -20,11 +20,14 @@ flake8 = "^3.6"
 mypy = "^0.740"
 pydocstyle = "^4.0"
 pylint = "^2.2"
+sphinx = "^2.2"
+sphinx-rtd-theme = "^0.4.3"
+toml = "^0.10.0"
 tox = "^3.14"
 
 [tool.poetry.extras]
 test = ["coverage", "pytest"]
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry~=1.0.2"]
 build-backend = "poetry.masonry.api"

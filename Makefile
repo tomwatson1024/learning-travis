@@ -1,8 +1,9 @@
 SHELL = /bin/bash -o pipefail
-ALL_FILES = src test
+ALL_FILES = src test docs/conf.py
 
 .PHONY: ci
-ci: lint coverage
+ci: lint coverage docs build
+
 
 .PHONY: lint
 lint: flake8 pylint mypy docs_check isort_check black_check
@@ -60,3 +61,14 @@ coverage: test
 	poetry run coverage report --fail-under=100 --skip-covered \
 	--omit=$(shell cat .coverage_not_yet | grep -vE "^\s*(#.*)?$$" | tr "\n" ",") \
 	| grep -v "TOTAL"
+
+
+.PHONY: docs
+docs:
+	rm -rf docs/build
+	poetry run sphinx-build -W -b html docs/ docs/build
+
+
+.PHONY: build
+build:
+	poetry build

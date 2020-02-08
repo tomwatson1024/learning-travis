@@ -2,7 +2,8 @@ build
 .coverage
 .coverage.*
 dist
-
+docs/build
+docs/modules
 *.egg-info
 _env
 .mypy_cache
